@@ -1,3 +1,6 @@
+# most of this code was modified from David Kaleko
+# https://github.com/kaleko/CourseraML/blob/master/ex2/ex2.ipynb
+
 import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
