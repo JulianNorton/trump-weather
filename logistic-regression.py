@@ -175,7 +175,7 @@ min_temp = int(input(''))
 # print('Pick min temp (°F)')
 # min_temp = input('')
 prediction = (h(theta,np.array([1, average_min, average_max, mean_temp, max_temp, min_temp])))
-print('There is a', prediction, '% change trump would have tweeted about climate change')
+print('There is a', prediction * 100, '% change trump would have tweeted about climate change')
 
 
 
