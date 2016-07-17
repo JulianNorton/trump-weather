@@ -9,24 +9,19 @@ from scipy import optimize
 debug = False
 
 datafile = 'data-formatted.csv'
-#!head $datafile
-
+# !head $datafile
 loaded_data = np.loadtxt(datafile,delimiter=',',unpack=True) #Read in comma separated data
 
-##Form the usual "X" matrix and "y" vector
+# Form the usual "X" matrix and "y" vector
 X = np.transpose(np.array(loaded_data[:-1]))
 y = np.transpose(np.array(loaded_data[-1:]))
 m = y.size # number of training examples
 
-##Insert the usual column of 1's into the "X" matrix
+# Insert the usual column of 1's into the "X" matrix
 X = np.insert(X,0,1,axis=1)
 
-def print_test():
-    print(len(pos))
-    plotData()
 
-#Divide the sample into two: ones with positive classification, one with null classification
-
+# Divide the sample into two: ones with positive classification, one with null classification
 pos = np.array([X[i] for i in range(X.shape[0]) if y[i] == 1])
 neg = np.array([X[i] for i in range(X.shape[0]) if y[i] == 0])
 
@@ -73,9 +68,6 @@ def computeCost(mytheta,myX,myy,mylambda = 0.):
     term2 = np.dot((1-np.array(myy)).T,np.log(1-h(mytheta,myX)))
     regterm = (mylambda/2) * np.sum(np.dot(mytheta[1:].T,mytheta[1:])) #Skip theta0
     return float( (1./m) * ( np.sum(term1 - term2) + regterm ) )
-
-# print_test()
-# print_test()
 
 # Check theta as zeros, and what cost returns
 initial_theta = np.zeros((X.shape[1],1))
@@ -168,7 +160,6 @@ max_temp = int(input(''))
 print('\n \n Input the min temp (F)')
 min_temp = int(input(''))
 
-
 # print('Pick max temp (°F)')
 # max_temp = input('')
 
@@ -176,12 +167,4 @@ min_temp = int(input(''))
 # min_temp = input('')
 prediction = (h(theta,np.array([1, average_min, average_max, mean_temp, max_temp, min_temp])))
 print('There is a', prediction * 100, '% change trump would have tweeted about climate change')
-
-
-
-
-
-
-
-
 
