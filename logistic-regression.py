@@ -9,7 +9,7 @@ from scipy.special import expit #Vectorized sigmoid function
 from scipy import optimize
 
 
-debug = False
+debug = True
 
 datafile = 'data-formatted.csv'
 # !head $datafile
@@ -36,28 +36,29 @@ def plotData():
     plt.figure(figsize=(10,6))
     plt.plot(pos[:,5],pos[:,1],'ro',label='positives')
     plt.plot(neg[:,5],neg[:,1],'yo',label='negatives', alpha=0.2, color='#000000')
-    plt.xlabel('Average Low (°F)')
-    plt.ylabel('Actual Low (°F) ')
+    plt.xlabel('Average Low (F)')
+    plt.ylabel('Actual Low (F) ')
     plt.legend()
-    if debug == True:
-        plt.show()
-
-
-
-
-#Quick check of what expit is 
-myx = np.arange(-10,10,.1)
-if debug == True:
-    plt.plot(myx,expit(myx))
-    plt.title("Sigmoid function!")
-    plt.grid(True)
+    # if debug == True:
     plt.show()
+
+
+
+
+
+# if debug == True:
+    # Quick check of what expit is 
+    # myx = np.arange(-10,10,.1)
+#     plt.plot(myx,expit(myx))
+#     plt.title("Sigmoid function!")
+#     plt.grid(True)
+#     plt.show()
     
 #Hypothesis function and cost function for logistic regression
-def h(mytheta,myX): #Logistic hypothesis function
+def h(mytheta,myX): # Logistic hypothesis function
     return expit(np.dot(myX,mytheta))
 
-#Cost function, default lambda (regularization) 0
+# Cost function, default lambda (regularization) 0
 def computeCost(mytheta,myX,myy,mylambda = 0.): 
     """
     theta_start is an n- dimensional vector of initial theta guess
@@ -81,7 +82,7 @@ computeCost(initial_theta,X,y)
 # It only needs the cost function, and it minimizes with the "downhill simplex algorithm."
 # http://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.optimize.fmin.html
 
-def optimizeTheta(mytheta,myX,myy,mylambda=0.):
+def optimizeTheta(mytheta, myX, myy , mylambda=.05):
     result = optimize.fmin(computeCost, x0=mytheta, args=(myX, myy, mylambda), maxiter=400, full_output=True)
     return result[0], result[1]
 
@@ -100,12 +101,11 @@ if debug == True:
 
 boundary_xs = np.array([np.min(X[:,1]), np.max(X[:,1])])
 boundary_ys = (-1./theta[2])*(theta[0] + theta[1]*boundary_xs)
+plotData()
+plt.plot(boundary_xs,boundary_ys,'b-',label='Decision Boundary')
+plt.legend()
 
-if debug == True:
-    plotData()
-    plt.plot(boundary_xs,boundary_ys,'b-',label='Decision Boundary')
-    plt.legend()
-    plt.show()
+plt.show()
 
 def makePrediction(mytheta, myx):
     return h(mytheta,myx) >= 0.5
@@ -117,57 +117,44 @@ tot = len(pos)+len(neg)
 prcnt_correct = float(pos_correct + neg_correct)/tot
 
 if debug == True:
-    print("Fraction of training samples correctly predicted: %f." % prcnt_correct)
+    print("Fraction of training samples correctly predicted: %f." % prcnt_correct)  
+
+def trump_tweet_predictor():
+    # X_row_length = len(X[:, 0])
+    # X_column_length = len(X[0, :])
+          # day, column
+    # print(X[0, 1])
+    # print(X[0, 1:])
+    # X_column_1 = 'Average min'
+    # X_column_2 = 'Average max'
+    # X_column_3 = 'mean actual'
+    # X_column_4 = 'max temp actual'
+    # X_column_5 = 'min temp actual'
+    print('\n \n Pick a day out of the year (0-364)')
+    date = int(input(''))
+
+    average_min = X[date, 1]
+    average_max = X[date, 2]
+
+    print('Average min temp that day ==', average_min, 'F')
+    print('Average max temp that day ==', average_max, 'F')
+
+    print('\n \n Input the mean temp (F)')
+    mean_temp = int(input(''))
+
+    print('\n \n Input the max temp (F)')
+    max_temp = int(input(''))
+
+    print('\n \n Input the min temp (F)')
+    min_temp = int(input(''))
+
+    # print('Pick max temp (°F)')
+    # max_temp = input('')
+
+    # print('Pick min temp (°F)')
+    # min_temp = input('')
+    prediction = (h(theta,np.array([1, average_min, average_max, mean_temp, max_temp, min_temp])))
+    print('There is a', prediction * 100, '% change trump would have tweeted about climate change')
 
 
-#For a student with an Exam 1 score of 45 and an Exam 2 score of 85, 
-#you should expect to see an admission probability of 0.776.
-
-
-# Average min
-# Average max
-
-# print(date)
-
-# X_row_length = len(X[:, 0])
-# X_column_length = len(X[0, :])
-
-
-# print(X[2:1])
-X_column_1 = 'Average min'
-X_column_2 = 'Average max'
-X_column_3 = 'mean actual'
-X_column_4 = 'max temp actual'
-X_column_5 = 'min temp actual'
-
-    
-      # day, column
-# print(X[0, 1])
-# print(X[0, 1:])
-
-print('\n \n Pick a day out of the year (0-364)')
-date = int(input(''))
-
-average_min = X[date, 1]
-average_max = X[date, 2]
-
-print('Average min temp that day ==', average_min, 'F')
-print('Average max temp that day ==', average_max, 'F')
-
-print('\n \n Input the mean temp (F)')
-mean_temp = int(input(''))
-
-print('\n \n Input the max temp (F)')
-max_temp = int(input(''))
-
-print('\n \n Input the min temp (F)')
-min_temp = int(input(''))
-
-# print('Pick max temp (°F)')
-# max_temp = input('')
-
-# print('Pick min temp (°F)')
-# min_temp = input('')
-prediction = (h(theta,np.array([1, average_min, average_max, mean_temp, max_temp, min_temp])))
-print('There is a', prediction * 100, '% change trump would have tweeted about climate change')
 
