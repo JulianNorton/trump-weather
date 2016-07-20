@@ -1,5 +1,8 @@
 # ORIGINAL FILE URL https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/learn/python/learn/estimators/dnn_linear_combined.py#L236
 
+# dnn_linear_error
+# https://github.com/tensorflow/tensorflow/issues/3200#issuecomment-233814359
+
 # Copyright 2016 The TensorFlow Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
