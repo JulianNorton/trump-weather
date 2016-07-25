@@ -15,6 +15,7 @@ For example, from [this tweet](https://twitter.com/realdonaldtrump/status/418542
 #### other data sources
 * [weatherbase](http://www.weatherbase.com/weather/weatherdaily.php3?s=108503&month=7&theday=12&cityname=New+York+-+Central+Park%2C+New+York%2C+United+States+of+America&units=)
 * [intellicast](http://www.intellicast.com/Local/History.aspx?location=USNY0996)
+* * [wunderground](https://www.wunderground.com/history/airport/KNYC/2014/01/01/DailyHistory.html?req_city=New+York&req_state=NY&req_statename=New+York&reqdb.zip=10018&reqdb.magic=1&reqdb.wmo=99999&MR=1)
 
 
 ([ps, climate change is real](https://i.imgur.com/Rjdlzjz.jpg))
