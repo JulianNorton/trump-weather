@@ -39,8 +39,8 @@ def plotData():
     plt.xlabel('Average Low (F)')
     plt.ylabel('Actual Low (F) ')
     plt.legend()
-    # if debug == True:
-    plt.show()
+    if debug == True:
+        plt.show()
 
 
 
@@ -101,11 +101,13 @@ if debug == True:
 
 boundary_xs = np.array([np.min(X[:,1]), np.max(X[:,1])])
 boundary_ys = (-1./theta[2])*(theta[0] + theta[1]*boundary_xs)
-plotData()
+if debug == True:
+    plotData()
 plt.plot(boundary_xs,boundary_ys,'b-',label='Decision Boundary')
 plt.legend()
 
-plt.show()
+if debug == True:
+    plt.show()
 
 def makePrediction(mytheta, myx):
     return h(mytheta,myx) >= 0.5
@@ -154,7 +156,7 @@ def trump_tweet_predictor():
     # print('Pick min temp (°F)')
     # min_temp = input('')
     prediction = (h(theta,np.array([1, average_min, average_max, mean_temp, max_temp, min_temp])))
-    print('There is a', prediction * 100, '% change trump would have tweeted about climate change')
+    print('There is a', prediction * 100, '% chance trump would have tweeted about climate change')
 
-
+trump_tweet_predictor()
 
