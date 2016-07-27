@@ -36,6 +36,7 @@ def plotData():
     plt.figure(figsize=(10,6))
     plt.plot(pos[:,5],pos[:,1],'ro',label='positives')
     plt.plot(neg[:,5],neg[:,1],'yo',label='negatives', alpha=0.2, color='#000000')
+    plt.plot(boundary_xs,boundary_ys,'b-',label='Decision Boundary')
     plt.xlabel('Average Low (F)')
     plt.ylabel('Actual Low (F) ')
     plt.legend()
